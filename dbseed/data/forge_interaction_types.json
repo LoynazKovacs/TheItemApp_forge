@@ -1,0 +1,9 @@
+[
+  { "_id": { "$oid": "8d0000000000000000430001" }, "key": "chat", "name": "Chat Session", "color": "#a855f7", "icon": "lucide:bot", "order": 10 },
+  { "_id": { "$oid": "8d0000000000000000430002" }, "key": "meeting", "name": "Meeting", "color": "#3b82f6", "icon": "lucide:users", "order": 20 },
+  { "_id": { "$oid": "8d0000000000000000430003" }, "key": "call", "name": "Call", "color": "#22c55e", "icon": "lucide:phone", "order": 30 },
+  { "_id": { "$oid": "8d0000000000000000430004" }, "key": "voice_note", "name": "Voice Note", "color": "#f59e0b", "icon": "lucide:mic", "order": 40 },
+  { "_id": { "$oid": "8d0000000000000000430005" }, "key": "email", "name": "Email", "color": "#38bdf8", "icon": "lucide:mail", "order": 50 },
+  { "_id": { "$oid": "8d0000000000000000430006" }, "key": "note", "name": "Note", "color": "#94a3b8", "icon": "lucide:sticky-note", "order": 60 },
+  { "_id": { "$oid": "8d0000000000000000430007" }, "key": "document", "name": "Document", "color": "#6366f1", "icon": "lucide:paperclip", "order": 70 }
+]

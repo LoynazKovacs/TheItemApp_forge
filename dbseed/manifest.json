@@ -1,0 +1,128 @@
+{
+  "version": 2,
+  "appKey": "forge",
+  "appVersion": "1.0.0",
+  "engineRequires": ">=1.0.0",
+  "requiresCore": true,
+  "collections": [
+    {
+      "collection": "apps",
+      "file": "apps.json",
+      "matchBy": "key",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "description", "icon", "enabled", "groupIds", "cantDelete"],
+      "filter": { "key": "forge" }
+    },
+    {
+      "collection": "items",
+      "file": "items.json",
+      "matchBy": "key",
+      "installMode": "shared",
+      "exportFields": [
+        "key", "collection", "title", "titleSingular", "titlePlural", "description",
+        "ai", "icon", "appId", "behavior", "schema", "ui", "api", "auth", "tier", "kind", "meta"
+      ],
+      "filter": { "appId": "<thisAppId>" }
+    },
+    {
+      "collection": "users",
+      "file": "users.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["username", "usernameLower", "isSystem", "groupIds", "isFunctional", "appId"]
+    },
+    {
+      "collection": "dashboards",
+      "file": "dashboards.json",
+      "matchBy": "_id",
+      "installMode": "installConfig",
+      "exportFields": ["appId", "name", "icon", "isHome", "statusId", "interactive", "groupIds", "gridsterConfigId", "tiles"],
+      "filter": { "appId": "<thisAppId>" }
+    },
+    {
+      "collection": "windows",
+      "file": "windows.json",
+      "matchBy": "_id",
+      "installMode": "installConfig",
+      "exportFields": ["dashboardId", "title", "icon", "groupIds", "modelId", "prefabId", "prefabConfig", "sort"]
+    },
+    {
+      "collection": "item_kanban_views",
+      "file": "data/item_kanban_views.json",
+      "matchBy": "_id",
+      "installMode": "installConfig",
+      "exportFields": ["modelId", "name", "statusField", "columnKeyPath", "contentField", "headerField", "chips", "isDefault", "pinned", "order", "appId"]
+    },
+    {
+      "collection": "item_chart_views",
+      "file": "data/item_chart_views.json",
+      "matchBy": "_id",
+      "installMode": "installConfig",
+      "exportFields": ["modelId", "name", "data", "builder", "pinned", "isDefault", "order", "appId"]
+    },
+    {
+      "collection": "item_tree_views",
+      "file": "data/item_tree_views.json",
+      "matchBy": "_id",
+      "installMode": "installConfig",
+      "exportFields": ["modelId", "name", "groupBy", "sortField", "sortDir", "leafLimit", "allowCreate", "rowDensity", "showAvatar", "avatarField", "avatarShape", "showIcon", "showBadge", "badgeField", "showTitle", "titleField", "titleWeight", "showSubtitle", "showRightTop", "showRightBottom", "rightBottomField", "rightBottomKind", "isDefault", "pinned", "order"]
+    },
+    {
+      "collection": "forge_account_stages",
+      "file": "data/forge_account_stages.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "color", "order", "isWon", "isLost"]
+    },
+    {
+      "collection": "forge_deal_stages",
+      "file": "data/forge_deal_stages.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "color", "order", "isWon", "isLost"]
+    },
+    {
+      "collection": "forge_interaction_types",
+      "file": "data/forge_interaction_types.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "color", "icon", "order"]
+    },
+    {
+      "collection": "forge_brd_statuses",
+      "file": "data/forge_brd_statuses.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "color", "order", "isApproved", "isDone"]
+    },
+    {
+      "collection": "forge_requirement_statuses",
+      "file": "data/forge_requirement_statuses.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "color", "order", "isConfirmed", "isDone", "isDropped"]
+    },
+    {
+      "collection": "forge_requirement_categories",
+      "file": "data/forge_requirement_categories.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "color", "icon", "order"]
+    },
+    {
+      "collection": "forge_requirement_priorities",
+      "file": "data/forge_requirement_priorities.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "color", "order"]
+    }
+  ],
+  "routes": [
+    {
+      "type": "api-proxy",
+      "pathPrefix": "/forge-api",
+      "upstream": "forge-api:3011",
+      "readTimeout": "2m"
+    }
+  ]
+}

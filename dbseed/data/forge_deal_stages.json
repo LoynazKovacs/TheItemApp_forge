@@ -1,0 +1,9 @@
+[
+  { "_id": { "$oid": "8d0000000000000000420001" }, "key": "new", "name": "New", "color": "#94a3b8", "order": 10, "isWon": false, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000420002" }, "key": "discovery", "name": "Discovery", "color": "#38bdf8", "order": 20, "isWon": false, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000420003" }, "key": "brd", "name": "BRD / Scoping", "color": "#a855f7", "order": 30, "isWon": false, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000420004" }, "key": "proposal", "name": "Proposal", "color": "#f59e0b", "order": 40, "isWon": false, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000420005" }, "key": "building", "name": "Building", "color": "#3b82f6", "order": 50, "isWon": true, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000420006" }, "key": "delivered", "name": "Delivered", "color": "#22c55e", "order": 60, "isWon": true, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000420007" }, "key": "lost", "name": "Lost", "color": "#ef4444", "order": 70, "isWon": false, "isLost": true }
+]

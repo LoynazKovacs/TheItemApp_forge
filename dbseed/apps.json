@@ -1,0 +1,15 @@
+[
+  {
+    "_id": { "$oid": "8d0000000000000000000001" },
+    "key": "forge",
+    "name": "Forge",
+    "description": "Our internal CRM / PSA — where a customer's raw idea is forged into shipped software. Tracks the full lifecycle: Accounts and Contacts, Deals through the pipeline, every Interaction (meetings, calls, chat sessions, voice notes, documents), and the BRDs + granular Requirements that become the build spec. Each BRD links back to its source chat session and forward to the project-manager Initiative and the app we deliver — a living thread from first hello to delivered product.",
+    "icon": "lucide:hammer",
+    "enabled": true,
+    "groupIds": [
+      { "$oid": "7000000000000000001d0001" },
+      { "$oid": "7000000000000000001d0002" }
+    ],
+    "cantDelete": false
+  }
+]

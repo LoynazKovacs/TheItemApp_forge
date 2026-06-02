@@ -1,0 +1,7 @@
+[
+  { "_id": { "$oid": "8d0000000000000000410001" }, "key": "lead", "name": "Lead", "color": "#94a3b8", "order": 10, "isWon": false, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000410002" }, "key": "prospect", "name": "Prospect", "color": "#38bdf8", "order": 20, "isWon": false, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000410003" }, "key": "active", "name": "Active Client", "color": "#22c55e", "order": 30, "isWon": true, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000410004" }, "key": "dormant", "name": "Dormant", "color": "#f59e0b", "order": 40, "isWon": false, "isLost": false },
+  { "_id": { "$oid": "8d0000000000000000410005" }, "key": "lost", "name": "Lost", "color": "#ef4444", "order": 50, "isWon": false, "isLost": true }
+]

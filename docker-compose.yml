@@ -1,0 +1,37 @@
+# Forge — internal CRM / PSA app. Joins core's theitemapp network.
+# Usage: docker compose up -d --build
+#
+# One service:
+#   forge-api — Fastify app-container. Registers the Forge manifest with core
+#               (models, dashboards, windows, lookups), serves its seed bundle,
+#               and stays alive for the health check so the app persists in the
+#               core catalog. All CRUD/UI is core's generic meta-driven prefabs
+#               (list / kanban / tree / chart / show), so there is no federated
+#               frontend remote to build.
+
+services:
+  forge-api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      FORGE_API_PORT: "3011"
+      FORGE_APP_KEY: "forge"
+      FORGE_REGISTRATION_BASE_URL: "http://forge-api:3011"
+      APP_REGISTRATION_KEY: "${APP_REGISTRATION_KEY:-}"
+      CORE_API_URL: "http://backend:3001"
+      FORGE_CORE_API_KEY: "${FORGE_CORE_API_KEY:-}"
+    ports:
+      - "${FORGE_API_PORT:-3011}:3011"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:3011/api/health', (r) => { r.resume(); process.exit(r.statusCode === 200 ? 0 : 1); }).on('error', () => process.exit(1));"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+
+networks:
+  default:
+    name: theitemapp
+    external: true

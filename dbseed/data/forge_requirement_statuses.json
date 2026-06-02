@@ -1,0 +1,8 @@
+[
+  { "_id": { "$oid": "8d0000000000000000450001" }, "key": "proposed", "name": "Proposed", "color": "#94a3b8", "order": 10, "isConfirmed": false, "isDone": false, "isDropped": false },
+  { "_id": { "$oid": "8d0000000000000000450002" }, "key": "confirmed", "name": "Confirmed", "color": "#38bdf8", "order": 20, "isConfirmed": true, "isDone": false, "isDropped": false },
+  { "_id": { "$oid": "8d0000000000000000450003" }, "key": "in_build", "name": "In Build", "color": "#3b82f6", "order": 30, "isConfirmed": true, "isDone": false, "isDropped": false },
+  { "_id": { "$oid": "8d0000000000000000450004" }, "key": "delivered", "name": "Delivered", "color": "#22c55e", "order": 40, "isConfirmed": true, "isDone": true, "isDropped": false },
+  { "_id": { "$oid": "8d0000000000000000450005" }, "key": "deferred", "name": "Deferred", "color": "#f59e0b", "order": 50, "isConfirmed": false, "isDone": false, "isDropped": false },
+  { "_id": { "$oid": "8d0000000000000000450006" }, "key": "dropped", "name": "Dropped / Superseded", "color": "#71717a", "order": 60, "isConfirmed": false, "isDone": false, "isDropped": true }
+]

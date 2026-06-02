@@ -1,0 +1,6 @@
+[
+  { "_id": { "$oid": "8d0000000000000000470001" }, "key": "must", "name": "Must", "color": "#ef4444", "order": 10 },
+  { "_id": { "$oid": "8d0000000000000000470002" }, "key": "should", "name": "Should", "color": "#f59e0b", "order": 20 },
+  { "_id": { "$oid": "8d0000000000000000470003" }, "key": "could", "name": "Could", "color": "#38bdf8", "order": 30 },
+  { "_id": { "$oid": "8d0000000000000000470004" }, "key": "wont", "name": "Won't (for now)", "color": "#71717a", "order": 40 }
+]

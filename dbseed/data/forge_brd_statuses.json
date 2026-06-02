@@ -1,0 +1,8 @@
+[
+  { "_id": { "$oid": "8d0000000000000000440001" }, "key": "draft", "name": "Draft", "color": "#94a3b8", "order": 10, "isApproved": false, "isDone": false },
+  { "_id": { "$oid": "8d0000000000000000440002" }, "key": "in_review", "name": "In Review", "color": "#f59e0b", "order": 20, "isApproved": false, "isDone": false },
+  { "_id": { "$oid": "8d0000000000000000440003" }, "key": "approved", "name": "Approved", "color": "#22c55e", "order": 30, "isApproved": true, "isDone": false },
+  { "_id": { "$oid": "8d0000000000000000440004" }, "key": "building", "name": "Building", "color": "#3b82f6", "order": 40, "isApproved": true, "isDone": false },
+  { "_id": { "$oid": "8d0000000000000000440005" }, "key": "delivered", "name": "Delivered", "color": "#16a34a", "order": 50, "isApproved": true, "isDone": true },
+  { "_id": { "$oid": "8d0000000000000000440006" }, "key": "superseded", "name": "Superseded", "color": "#71717a", "order": 60, "isApproved": false, "isDone": false }
+]
