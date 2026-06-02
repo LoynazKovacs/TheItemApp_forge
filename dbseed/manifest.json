@@ -1,7 +1,7 @@
 {
   "version": 2,
   "appKey": "forge",
-  "appVersion": "1.2.0",
+  "appVersion": "1.3.0",
   "engineRequires": ">=1.0.0",
   "requiresCore": true,
   "collections": [
@@ -30,6 +30,22 @@
       "matchBy": "_id",
       "installMode": "shared",
       "exportFields": ["username", "usernameLower", "isSystem", "groupIds", "isFunctional", "appId"]
+    },
+    {
+      "collection": "chat_skills",
+      "file": "data/chat_skills.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "description", "instructions", "tags", "systemManaged", "groupIds", "appId"],
+      "filter": { "appId": "<thisAppId>" }
+    },
+    {
+      "collection": "chat_personas",
+      "file": "data/chat_personas.json",
+      "matchBy": "_id",
+      "installMode": "shared",
+      "exportFields": ["key", "name", "model", "description", "systemPrompt", "effort", "permissionMode", "allowedTools", "mcpServers", "allowAutomatedRuns", "groupIds", "skillIds", "maxTurns", "runAs", "appId", "capabilities"],
+      "filter": { "appId": "<thisAppId>" }
     },
     {
       "collection": "dashboards",

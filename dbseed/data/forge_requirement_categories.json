@@ -1,11 +1,92 @@
 [
-  { "_id": { "$oid": "8d0000000000000000460001" }, "key": "data_model", "name": "Data Model", "color": "#6366f1", "icon": "lucide:database", "order": 10 },
-  { "_id": { "$oid": "8d0000000000000000460002" }, "key": "workflow", "name": "Workflow", "color": "#3b82f6", "icon": "lucide:workflow", "order": 20 },
-  { "_id": { "$oid": "8d0000000000000000460003" }, "key": "report", "name": "Report / Metric", "color": "#0ea5e9", "icon": "lucide:chart-line", "order": 30 },
-  { "_id": { "$oid": "8d0000000000000000460004" }, "key": "integration", "name": "Integration", "color": "#14b8a6", "icon": "lucide:plug", "order": 40 },
-  { "_id": { "$oid": "8d0000000000000000460005" }, "key": "agent_capability", "name": "Agent Capability", "color": "#a855f7", "icon": "lucide:bot", "order": 50 },
-  { "_id": { "$oid": "8d0000000000000000460006" }, "key": "business_rule", "name": "Business Rule", "color": "#f59e0b", "icon": "lucide:scale", "order": 60 },
-  { "_id": { "$oid": "8d0000000000000000460007" }, "key": "edge_case", "name": "Edge Case", "color": "#ef4444", "icon": "lucide:triangle-alert", "order": 70 },
-  { "_id": { "$oid": "8d0000000000000000460008" }, "key": "role", "name": "Role / Permission", "color": "#ec4899", "icon": "lucide:shield", "order": 80 },
-  { "_id": { "$oid": "8d0000000000000000460009" }, "key": "ux", "name": "UI / UX", "color": "#84cc16", "icon": "lucide:layout-dashboard", "order": 90 }
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460005"
+    },
+    "key": "agent_capability",
+    "name": "Agent Capability",
+    "color": "#a855f7",
+    "icon": "lucide:bot",
+    "order": 50
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460006"
+    },
+    "key": "business_rule",
+    "name": "Business Rule",
+    "color": "#f59e0b",
+    "icon": "lucide:scale",
+    "order": 60
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460001"
+    },
+    "key": "data_model",
+    "name": "Data Model",
+    "color": "#6366f1",
+    "icon": "lucide:database",
+    "order": 10
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460007"
+    },
+    "key": "edge_case",
+    "name": "Edge Case",
+    "color": "#ef4444",
+    "icon": "lucide:triangle-alert",
+    "order": 70
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460004"
+    },
+    "key": "integration",
+    "name": "Integration",
+    "color": "#14b8a6",
+    "icon": "lucide:plug",
+    "order": 40
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460003"
+    },
+    "key": "report",
+    "name": "Report / Metric",
+    "color": "#0ea5e9",
+    "icon": "lucide:chart-line",
+    "order": 30
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460008"
+    },
+    "key": "role",
+    "name": "Role / Permission",
+    "color": "#ec4899",
+    "icon": "lucide:shield",
+    "order": 80
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460009"
+    },
+    "key": "ux",
+    "name": "UI / UX",
+    "color": "#84cc16",
+    "icon": "lucide:layout-dashboard",
+    "order": 90
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000460002"
+    },
+    "key": "workflow",
+    "name": "Workflow",
+    "color": "#3b82f6",
+    "icon": "lucide:workflow",
+    "order": 20
+  }
 ]

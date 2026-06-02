@@ -1,6 +1,123 @@
 [
   {
-    "_id": { "$oid": "8d0000000000000000030001" },
+    "_id": {
+      "$oid": "8d0000000000000000030007"
+    },
+    "key": "forge_account_stages",
+    "collection": "forge_account_stages",
+    "title": "Account Stages",
+    "titleSingular": "Account Stage",
+    "titlePlural": "Account Stages",
+    "description": "Governed lifecycle stages for an Account (lead → prospect → active client → dormant → lost). Drives colour-coded grouping and ordering.",
+    "icon": "lucide:milestone",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable unique key (slug).",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human-friendly name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "color": {
+          "type": "string",
+          "title": "Color",
+          "description": "UI color.",
+          "format": "color"
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering.",
+          "minimum": 0
+        },
+        "isWon": {
+          "type": "boolean",
+          "title": "Active client",
+          "description": "Whether this stage means a converted/active client.",
+          "default": false
+        },
+        "isLost": {
+          "type": "boolean",
+          "title": "Lost",
+          "description": "Whether this stage means the relationship is lost/dead.",
+          "default": false
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}",
+          "{{key}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "lookup"
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000030001"
+    },
     "key": "forge_accounts",
     "collection": "forge_accounts",
     "title": "Accounts",
@@ -15,39 +132,773 @@
       "warnings": []
     },
     "icon": "lucide:building-2",
-    "appId": { "$oid": "8d0000000000000000000001" },
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
     "schema": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "groupIds"],
+      "required": [
+        "name",
+        "groupIds"
+      ],
       "properties": {
-        "name": { "type": "string", "title": "Name", "description": "Account / company name.", "minLength": 1, "maxLength": 200 },
-        "legalName": { "type": "string", "title": "Legal name", "description": "Registered legal name if different.", "x-ui": { "hideInTable": true } },
-        "stageId": { "type": "string", "title": "Stage", "description": "Relationship lifecycle stage (governed).", "x-ref": "forge_account_stages" },
-        "industry": { "type": "string", "title": "Industry", "description": "Sector / domain (e.g. hospitality, logistics, retail)." },
-        "website": { "type": "string", "title": "Website", "description": "Primary website or social link.", "x-ui": { "hideInTable": true } },
-        "location": { "type": "string", "title": "Location", "description": "City / region." },
-        "country": { "type": "string", "title": "Country", "description": "Country.", "x-ui": { "hideInTable": true } },
-        "language": { "type": "string", "title": "Language", "description": "Primary language the client communicates in (ISO code or name)." },
-        "primaryContactId": { "type": "string", "title": "Primary contact", "description": "Main point of contact at this account.", "x-ref": "forge_contacts", "x-ui": { "hideInTable": true } },
-        "description": { "type": "string", "title": "About", "description": "Who they are and how they operate (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "tags": { "type": "array", "title": "Tags", "description": "Free-form labels.", "items": { "type": "string" }, "x-ui": { "hideInTable": true } },
-        "groupIds": { "type": "array", "title": "Groups", "description": "Row-security scope.", "items": { "type": "string", "x-ref": "groups" }, "x-ui": { "hideInTable": true } }
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Account / company name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "legalName": {
+          "type": "string",
+          "title": "Legal name",
+          "description": "Registered legal name if different.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "stageId": {
+          "type": "string",
+          "title": "Stage",
+          "description": "Relationship lifecycle stage (governed).",
+          "x-ref": "forge_account_stages"
+        },
+        "industry": {
+          "type": "string",
+          "title": "Industry",
+          "description": "Sector / domain (e.g. hospitality, logistics, retail)."
+        },
+        "website": {
+          "type": "string",
+          "title": "Website",
+          "description": "Primary website or social link.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "location": {
+          "type": "string",
+          "title": "Location",
+          "description": "City / region."
+        },
+        "country": {
+          "type": "string",
+          "title": "Country",
+          "description": "Country.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "language": {
+          "type": "string",
+          "title": "Language",
+          "description": "Primary language the client communicates in (ISO code or name)."
+        },
+        "primaryContactId": {
+          "type": "string",
+          "title": "Primary contact",
+          "description": "Main point of contact at this account.",
+          "x-ref": "forge_contacts",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "description": {
+          "type": "string",
+          "title": "About",
+          "description": "Who they are and how they operate (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "Free-form labels.",
+          "items": {
+            "type": "string"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Row-security scope.",
+          "items": {
+            "type": "string",
+            "x-ref": "groups"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        }
       }
     },
-    "ui": { "display": { "templates": ["{{name}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
     "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] }
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      }
     },
     "tier": 3,
     "kind": "data"
   },
   {
-    "_id": { "$oid": "8d0000000000000000030002" },
+    "_id": {
+      "$oid": "8d0000000000000000030006"
+    },
+    "key": "forge_brd_requirements",
+    "collection": "forge_brd_requirements",
+    "title": "Requirements",
+    "titleSingular": "Requirement",
+    "titlePlural": "Requirements",
+    "description": "One atomic, granular requirement within a BRD — the unit that makes the spec precise and traceable. Each row is a single statement (a data entity, a field, a workflow step, a report, a metric, an integration, an agent capability, a business rule, an edge case) with its rationale, acceptance criteria, priority and status. reqKey makes re-extraction idempotent (upsert, not duplicate); sourceQuote/sourceMessageId tie it to the exact line in the source chat; linkedIssueId ties it to the work that delivers it. changeLog records mutations so the requirement is LIVING — it can change as the conversation continues.",
+    "ai": {
+      "purpose": "The granular, line-by-line requirements of a BRD — each independently prioritised, statused, sourced, flagged for open questions, and linkable to the delivery task.",
+      "howItWorks": "Belongs to a BRD via brdId. reqKey is a STABLE slug unique within the BRD; re-extraction/re-sync upserts on (brdId, reqKey) so nothing ever duplicates. categoryId/priorityId/statusId are governed lookups. needsClarification=true + openQuestion mark a point that still needs the CLIENT's answer — directly queryable (filter needsClarification=true) and rendered by the 'Open questions' window on the BRD Workspace dashboard. sourceQuote/sourceMessageId tie the row to the client's exact words; linkedIssueId to the project-manager Story/Task that delivers it; changeLog is append-only history.",
+      "manipulation": "Follow the 'forge-brd-extraction' skill — it is the canonical, step-by-step procedure for this collection. One row per atomic requirement. For anything the client has not settled, set needsClarification=true and put the exact question in openQuestion; when they answer, fold it into requirement/acceptanceCriteria, append a changeLog line, clear needsClarification and move proposed→confirmed. Never reuse a reqKey and never delete a row — mark it dropped/superseded (with supersededByReqKey) instead.",
+      "outcomes": [],
+      "warnings": [
+        "reqKey is the idempotency key: keep it stable across re-syncs and never reuse it for a different requirement.",
+        "Open questions are tracked ONLY via needsClarification=true + openQuestion — never bury an unresolved point in prose.",
+        "History is append-only: prefer status/flag changes + changeLog over destructive edits."
+      ]
+    },
+    "icon": "lucide:list-checks",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "brdId",
+        "reqKey",
+        "title",
+        "statusId",
+        "groupIds"
+      ],
+      "properties": {
+        "brdId": {
+          "type": "string",
+          "title": "BRD",
+          "description": "Parent BRD.",
+          "x-ref": "forge_brds"
+        },
+        "reqKey": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable slug, unique within the BRD. The idempotency key for re-sync.",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "description": "Short requirement title.",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "categoryId": {
+          "type": "string",
+          "title": "Category",
+          "description": "Requirement category (governed): data model, workflow, report, integration, agent capability, business rule, edge case, role.",
+          "x-ref": "forge_requirement_categories"
+        },
+        "priorityId": {
+          "type": "string",
+          "title": "Priority",
+          "description": "MoSCoW priority (governed).",
+          "x-ref": "forge_requirement_priorities"
+        },
+        "statusId": {
+          "type": "string",
+          "title": "Status",
+          "description": "Requirement status (governed).",
+          "x-ref": "forge_requirement_statuses"
+        },
+        "needsClarification": {
+          "type": "boolean",
+          "title": "Needs clarification",
+          "description": "TRUE = this requirement has an open question that must be answered by the client before it is settled. The discovery agent works from this flag: filter needsClarification=true, ask the client the openQuestion, fill the answer back in, then set it false.",
+          "default": false
+        },
+        "openQuestion": {
+          "type": "string",
+          "title": "Open question",
+          "description": "The precise question to put to the client to resolve this requirement (what exactly we need them to confirm or decide). Paired with needsClarification.",
+          "x-ui": {
+            "format": "markdown"
+          }
+        },
+        "requirement": {
+          "type": "string",
+          "title": "Requirement",
+          "description": "The precise requirement statement (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "rationale": {
+          "type": "string",
+          "title": "Rationale",
+          "description": "Why this is needed — the business reason (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "acceptanceCriteria": {
+          "type": "string",
+          "title": "Acceptance criteria",
+          "description": "How we know it is done (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "sourceQuote": {
+          "type": "string",
+          "title": "Source quote",
+          "description": "The exact line(s) from the source chat this came from.",
+          "x-ui": {
+            "control": "textarea",
+            "hideInTable": true
+          }
+        },
+        "sourceMessageId": {
+          "type": "string",
+          "title": "Source message",
+          "description": "ID of the chat_session_messages row this was extracted from.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "sourceSessionId": {
+          "type": "string",
+          "title": "Source chat",
+          "description": "The chat session this requirement was extracted from.",
+          "x-ref": "chat_sessions",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "linkedIssueId": {
+          "type": "string",
+          "title": "Delivery issue",
+          "description": "Project-manager Story/Task that delivers this requirement.",
+          "x-ref": "project_manager_issues",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "supersededByReqKey": {
+          "type": "string",
+          "title": "Superseded by",
+          "description": "reqKey of the requirement that replaced this one, if any.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering within its category/BRD.",
+          "minimum": 0,
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "changeLog": {
+          "type": "array",
+          "title": "Change log",
+          "description": "Timestamped notes of how this requirement changed over time (living history).",
+          "items": {
+            "type": "string"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Row-security scope.",
+          "items": {
+            "type": "string",
+            "x-ref": "groups"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{title}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "data"
+  },
+  {
+    "_id": {
+      "$oid": "8d000000000000000003000a"
+    },
+    "key": "forge_brd_statuses",
+    "collection": "forge_brd_statuses",
+    "title": "BRD Statuses",
+    "titleSingular": "BRD Status",
+    "titlePlural": "BRD Statuses",
+    "description": "Governed lifecycle statuses for a BRD (draft → in review → approved → building → delivered → superseded).",
+    "icon": "lucide:file-clock",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable unique key (slug).",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human-friendly name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "color": {
+          "type": "string",
+          "title": "Color",
+          "description": "UI color.",
+          "format": "color"
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering.",
+          "minimum": 0
+        },
+        "isApproved": {
+          "type": "boolean",
+          "title": "Approved",
+          "description": "Whether this status means the BRD is signed off to build.",
+          "default": false
+        },
+        "isDone": {
+          "type": "boolean",
+          "title": "Delivered",
+          "description": "Whether this status means the build is delivered.",
+          "default": false
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}",
+          "{{key}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "lookup"
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000030005"
+    },
+    "key": "forge_brds",
+    "collection": "forge_brds",
+    "title": "BRDs",
+    "titleSingular": "BRD",
+    "titlePlural": "BRDs",
+    "description": "Business Requirements Document — the structured spec for what we will build for a client. The header record: domain, overview, lifecycle status, and the all-important provenance links (the source chat session it was extracted from) and forward links (the delivery Initiative and built app). The granular content lives in Requirements rows. A BRD is LIVING: lastSyncedMessageId is the watermark of how far into the source chat it has been reconciled, so the conversation can continue and the BRD stays current.",
+    "ai": {
+      "purpose": "The single source-of-truth spec for a client build, decomposed into granular forge_brd_requirements rows, kept LIVING against its source chat.",
+      "howItWorks": "One BRD per engagement, linked to its Account/Deal and to the chat it came from (sourceSessionId). lastSyncedMessageId + lastSyncedAt are the WATERMARK — how far the source chat has been reconciled; the next sync processes only chat_session_messages with _id greater than lastSyncedMessageId, never the whole thread. version bumps on each material revision. fileIds carries the client's source artefacts (their spreadsheets/exports/photos).",
+      "manipulation": "Follow the 'forge-brd-extraction' skill — the canonical procedure. First pass: create the header (status draft), set sourceSessionId/language/domain/overview, link source files to fileIds, then add one forge_brd_requirements row per atomic need. To keep it LIVING on re-sync: read lastSyncedMessageId, process only messages after it, upsert requirements by reqKey, link any new files, then ADVANCE lastSyncedMessageId/lastSyncedAt and bump version. Move statusId through the lifecycle draft→in_review→approved→building→delivered.",
+      "outcomes": [],
+      "warnings": [
+        "Always advance lastSyncedMessageId after a sync — it is what stops the next run reprocessing the whole chat.",
+        "Do not delete superseded requirements — mark them dropped/superseded so the history survives.",
+        "Open questions for the client live on the requirement rows (needsClarification + openQuestion), queryable as a worklist."
+      ]
+    },
+    "icon": "lucide:file-text",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "statusId",
+        "groupIds"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "description": "BRD title (e.g. 'Sörház — Cash, Expense & P&L app').",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "statusId": {
+          "type": "string",
+          "title": "Status",
+          "description": "Lifecycle status (governed).",
+          "x-ref": "forge_brd_statuses"
+        },
+        "accountId": {
+          "type": "string",
+          "title": "Account",
+          "description": "Client this BRD is for.",
+          "x-ref": "forge_accounts"
+        },
+        "dealId": {
+          "type": "string",
+          "title": "Deal",
+          "description": "Deal this BRD scopes.",
+          "x-ref": "forge_deals",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "summary": {
+          "type": "string",
+          "title": "Summary",
+          "description": "One-paragraph summary of the build.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "overview": {
+          "type": "string",
+          "title": "Overview",
+          "description": "Narrative overview: the client's world, current workflow, and the product we will build (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "domain": {
+          "type": "string",
+          "title": "Domain",
+          "description": "Business domain (e.g. hospitality / bar operations)."
+        },
+        "language": {
+          "type": "string",
+          "title": "Language",
+          "description": "Language the source conversation is in.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "sourceSessionId": {
+          "type": "string",
+          "title": "Source chat",
+          "description": "The chat session this BRD was extracted from (provenance — the gold thread).",
+          "x-ref": "chat_sessions",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "lastSyncedMessageId": {
+          "type": "string",
+          "title": "Synced through (msg)",
+          "description": "ID of the last chat_session_messages row reconciled into this BRD (watermark for incremental re-sync).",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "lastSyncedAt": {
+          "type": "string",
+          "title": "Last synced",
+          "description": "When the BRD was last reconciled against its source chat (ISO).",
+          "format": "date-time"
+        },
+        "initiativeId": {
+          "type": "string",
+          "title": "Initiative",
+          "description": "Project-manager Initiative delivering this BRD.",
+          "x-ref": "project_manager_issues",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "appId": {
+          "type": "string",
+          "title": "Delivered app",
+          "description": "The app built from this BRD.",
+          "x-ref": "apps",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "fileIds": {
+          "type": "array",
+          "title": "Files",
+          "description": "Source artefacts (spreadsheets, mockups, exports).",
+          "items": {
+            "type": "string",
+            "x-ref": "files"
+          },
+          "x-ui": {
+            "control": "file",
+            "hideInTable": true
+          }
+        },
+        "version": {
+          "type": "integer",
+          "title": "Version",
+          "description": "Revision counter, bumped on each material re-sync.",
+          "minimum": 1,
+          "default": 1
+        },
+        "groupIds": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Row-security scope.",
+          "items": {
+            "type": "string",
+            "x-ref": "groups"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{title}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "data"
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000030002"
+    },
     "key": "forge_contacts",
     "collection": "forge_contacts",
     "title": "Contacts",
@@ -62,37 +913,273 @@
       "warnings": []
     },
     "icon": "lucide:user-round",
-    "appId": { "$oid": "8d0000000000000000000001" },
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
     "schema": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "groupIds"],
+      "required": [
+        "name",
+        "groupIds"
+      ],
       "properties": {
-        "name": { "type": "string", "title": "Name", "description": "Full name.", "minLength": 1, "maxLength": 200 },
-        "accountId": { "type": "string", "title": "Account", "description": "Account this person belongs to.", "x-ref": "forge_accounts" },
-        "role": { "type": "string", "title": "Role", "description": "Job title / role (e.g. owner, operations manager)." },
-        "email": { "type": "string", "title": "Email", "description": "Email address." },
-        "phone": { "type": "string", "title": "Phone", "description": "Phone number.", "x-ui": { "hideInTable": true } },
-        "telegram": { "type": "string", "title": "Telegram", "description": "Telegram handle / username.", "x-ui": { "hideInTable": true } },
-        "preferredLanguage": { "type": "string", "title": "Language", "description": "Preferred communication language.", "x-ui": { "hideInTable": true } },
-        "isPrimary": { "type": "boolean", "title": "Primary", "description": "Whether this is the main point of contact.", "default": false },
-        "notes": { "type": "string", "title": "Notes", "description": "Free-form notes about this person (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "groupIds": { "type": "array", "title": "Groups", "description": "Row-security scope.", "items": { "type": "string", "x-ref": "groups" }, "x-ui": { "hideInTable": true } }
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Full name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "accountId": {
+          "type": "string",
+          "title": "Account",
+          "description": "Account this person belongs to.",
+          "x-ref": "forge_accounts"
+        },
+        "role": {
+          "type": "string",
+          "title": "Role",
+          "description": "Job title / role (e.g. owner, operations manager)."
+        },
+        "email": {
+          "type": "string",
+          "title": "Email",
+          "description": "Email address."
+        },
+        "phone": {
+          "type": "string",
+          "title": "Phone",
+          "description": "Phone number.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "telegram": {
+          "type": "string",
+          "title": "Telegram",
+          "description": "Telegram handle / username.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "preferredLanguage": {
+          "type": "string",
+          "title": "Language",
+          "description": "Preferred communication language.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "isPrimary": {
+          "type": "boolean",
+          "title": "Primary",
+          "description": "Whether this is the main point of contact.",
+          "default": false
+        },
+        "notes": {
+          "type": "string",
+          "title": "Notes",
+          "description": "Free-form notes about this person (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Row-security scope.",
+          "items": {
+            "type": "string",
+            "x-ref": "groups"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        }
       }
     },
-    "ui": { "display": { "templates": ["{{name}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
     "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] }
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      }
     },
     "tier": 3,
     "kind": "data"
   },
   {
-    "_id": { "$oid": "8d0000000000000000030003" },
+    "_id": {
+      "$oid": "8d0000000000000000030008"
+    },
+    "key": "forge_deal_stages",
+    "collection": "forge_deal_stages",
+    "title": "Deal Stages",
+    "titleSingular": "Deal Stage",
+    "titlePlural": "Deal Stages",
+    "description": "Governed pipeline stages for a Deal (new → discovery → BRD → proposal → building → delivered, plus lost). These are the kanban columns of the pipeline board.",
+    "icon": "lucide:columns-3",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable unique key (slug).",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human-friendly name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "color": {
+          "type": "string",
+          "title": "Color",
+          "description": "UI color.",
+          "format": "color"
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering (pipeline left→right).",
+          "minimum": 0
+        },
+        "isWon": {
+          "type": "boolean",
+          "title": "Won",
+          "description": "Whether this stage means the deal is won/in delivery.",
+          "default": false
+        },
+        "isLost": {
+          "type": "boolean",
+          "title": "Lost",
+          "description": "Whether this stage means the deal is lost.",
+          "default": false
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}",
+          "{{key}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "lookup"
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000030003"
+    },
     "key": "forge_deals",
     "collection": "forge_deals",
     "title": "Deals",
@@ -107,39 +1194,292 @@
       "warnings": []
     },
     "icon": "lucide:target",
-    "appId": { "$oid": "8d0000000000000000000001" },
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
     "schema": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["name", "accountId", "stageId", "groupIds"],
+      "required": [
+        "name",
+        "accountId",
+        "stageId",
+        "groupIds"
+      ],
       "properties": {
-        "name": { "type": "string", "title": "Name", "description": "Deal name (e.g. 'Sörház cash & P&L app').", "minLength": 1, "maxLength": 200 },
-        "accountId": { "type": "string", "title": "Account", "description": "Account this deal belongs to.", "x-ref": "forge_accounts" },
-        "stageId": { "type": "string", "title": "Stage", "description": "Pipeline stage (governed).", "x-ref": "forge_deal_stages" },
-        "primaryContactId": { "type": "string", "title": "Contact", "description": "Primary contact for this deal.", "x-ref": "forge_contacts", "x-ui": { "hideInTable": true } },
-        "summary": { "type": "string", "title": "Summary", "description": "What this deal is about (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "valueNote": { "type": "string", "title": "Value", "description": "Free-form value / pricing note." },
-        "nextStep": { "type": "string", "title": "Next step", "description": "The immediate next action.", "x-ui": { "hideInTable": true } },
-        "expectedCloseAt": { "type": "string", "title": "Expected close", "description": "Target close / decision date (ISO).", "format": "date-time", "x-ui": { "hideInTable": true } },
-        "brdId": { "type": "string", "title": "BRD", "description": "Business requirements document scoping this deal.", "x-ref": "forge_brds", "x-ui": { "hideInTable": true } },
-        "initiativeId": { "type": "string", "title": "Initiative", "description": "Project-manager Initiative delivering this deal.", "x-ref": "project_manager_issues", "x-ui": { "hideInTable": true } },
-        "appId": { "type": "string", "title": "Delivered app", "description": "The app we built / are building for this deal.", "x-ref": "apps", "x-ui": { "hideInTable": true } },
-        "groupIds": { "type": "array", "title": "Groups", "description": "Row-security scope.", "items": { "type": "string", "x-ref": "groups" }, "x-ui": { "hideInTable": true } }
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Deal name (e.g. 'Sörház cash & P&L app').",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "accountId": {
+          "type": "string",
+          "title": "Account",
+          "description": "Account this deal belongs to.",
+          "x-ref": "forge_accounts"
+        },
+        "stageId": {
+          "type": "string",
+          "title": "Stage",
+          "description": "Pipeline stage (governed).",
+          "x-ref": "forge_deal_stages"
+        },
+        "primaryContactId": {
+          "type": "string",
+          "title": "Contact",
+          "description": "Primary contact for this deal.",
+          "x-ref": "forge_contacts",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "summary": {
+          "type": "string",
+          "title": "Summary",
+          "description": "What this deal is about (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "valueNote": {
+          "type": "string",
+          "title": "Value",
+          "description": "Free-form value / pricing note."
+        },
+        "nextStep": {
+          "type": "string",
+          "title": "Next step",
+          "description": "The immediate next action.",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "expectedCloseAt": {
+          "type": "string",
+          "title": "Expected close",
+          "description": "Target close / decision date (ISO).",
+          "format": "date-time",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "brdId": {
+          "type": "string",
+          "title": "BRD",
+          "description": "Business requirements document scoping this deal.",
+          "x-ref": "forge_brds",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "initiativeId": {
+          "type": "string",
+          "title": "Initiative",
+          "description": "Project-manager Initiative delivering this deal.",
+          "x-ref": "project_manager_issues",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "appId": {
+          "type": "string",
+          "title": "Delivered app",
+          "description": "The app we built / are building for this deal.",
+          "x-ref": "apps",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Row-security scope.",
+          "items": {
+            "type": "string",
+            "x-ref": "groups"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        }
       }
     },
-    "ui": { "display": { "templates": ["{{name}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
     "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] }
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      }
     },
     "tier": 3,
     "kind": "data"
   },
   {
-    "_id": { "$oid": "8d0000000000000000030004" },
+    "_id": {
+      "$oid": "8d0000000000000000030009"
+    },
+    "key": "forge_interaction_types",
+    "collection": "forge_interaction_types",
+    "title": "Interaction Types",
+    "titleSingular": "Interaction Type",
+    "titlePlural": "Interaction Types",
+    "description": "Governed vocabulary of touchpoint kinds (meeting, call, chat session, voice note, email, note, document). Each has an icon for the timeline.",
+    "icon": "lucide:tags",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable unique key (slug).",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human-friendly name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "color": {
+          "type": "string",
+          "title": "Color",
+          "description": "UI color.",
+          "format": "color"
+        },
+        "icon": {
+          "type": "string",
+          "title": "Icon",
+          "description": "Lucide icon key."
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering.",
+          "minimum": 0
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}",
+          "{{key}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "lookup"
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000030004"
+    },
     "key": "forge_interactions",
     "collection": "forge_interactions",
     "title": "Interactions",
@@ -154,313 +1494,179 @@
       "warnings": []
     },
     "icon": "lucide:message-square-text",
-    "appId": { "$oid": "8d0000000000000000000001" },
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
     "schema": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["title", "typeId", "groupIds"],
+      "required": [
+        "title",
+        "typeId",
+        "groupIds"
+      ],
       "properties": {
-        "title": { "type": "string", "title": "Title", "description": "Short summary of the touchpoint.", "minLength": 1, "maxLength": 240 },
-        "typeId": { "type": "string", "title": "Type", "description": "Interaction type (governed).", "x-ref": "forge_interaction_types" },
-        "occurredAt": { "type": "string", "title": "When", "description": "When it happened (ISO).", "format": "date-time" },
-        "accountId": { "type": "string", "title": "Account", "description": "Account this touchpoint belongs to.", "x-ref": "forge_accounts" },
-        "contactId": { "type": "string", "title": "Contact", "description": "Contact involved.", "x-ref": "forge_contacts", "x-ui": { "hideInTable": true } },
-        "dealId": { "type": "string", "title": "Deal", "description": "Deal this touchpoint relates to.", "x-ref": "forge_deals", "x-ui": { "hideInTable": true } },
-        "channel": { "type": "string", "title": "Channel", "description": "Where it happened (Telegram, phone, in person, email).", "x-ui": { "hideInTable": true } },
-        "summary": { "type": "string", "title": "Notes", "description": "What was discussed / outcome (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "chatSessionId": { "type": "string", "title": "Chat session", "description": "Source chat session, when this interaction is an agent chat.", "x-ref": "chat_sessions", "x-ui": { "hideInTable": true } },
-        "fileIds": { "type": "array", "title": "Files", "description": "Attached files (documents, screenshots, voice notes).", "items": { "type": "string", "x-ref": "files" }, "x-ui": { "control": "file", "hideInTable": true } },
-        "groupIds": { "type": "array", "title": "Groups", "description": "Row-security scope.", "items": { "type": "string", "x-ref": "groups" }, "x-ui": { "hideInTable": true } }
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "description": "Short summary of the touchpoint.",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "typeId": {
+          "type": "string",
+          "title": "Type",
+          "description": "Interaction type (governed).",
+          "x-ref": "forge_interaction_types"
+        },
+        "occurredAt": {
+          "type": "string",
+          "title": "When",
+          "description": "When it happened (ISO).",
+          "format": "date-time"
+        },
+        "accountId": {
+          "type": "string",
+          "title": "Account",
+          "description": "Account this touchpoint belongs to.",
+          "x-ref": "forge_accounts"
+        },
+        "contactId": {
+          "type": "string",
+          "title": "Contact",
+          "description": "Contact involved.",
+          "x-ref": "forge_contacts",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "dealId": {
+          "type": "string",
+          "title": "Deal",
+          "description": "Deal this touchpoint relates to.",
+          "x-ref": "forge_deals",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "channel": {
+          "type": "string",
+          "title": "Channel",
+          "description": "Where it happened (Telegram, phone, in person, email).",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "summary": {
+          "type": "string",
+          "title": "Notes",
+          "description": "What was discussed / outcome (Markdown).",
+          "x-ui": {
+            "format": "markdown",
+            "hideInTable": true
+          }
+        },
+        "chatSessionId": {
+          "type": "string",
+          "title": "Chat session",
+          "description": "Source chat session, when this interaction is an agent chat.",
+          "x-ref": "chat_sessions",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "fileIds": {
+          "type": "array",
+          "title": "Files",
+          "description": "Attached files (documents, screenshots, voice notes).",
+          "items": {
+            "type": "string",
+            "x-ref": "files"
+          },
+          "x-ui": {
+            "control": "file",
+            "hideInTable": true
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Row-security scope.",
+          "items": {
+            "type": "string",
+            "x-ref": "groups"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        }
       }
     },
-    "ui": { "display": { "templates": ["{{title}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{title}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
     "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] }
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      }
     },
     "tier": 3,
     "kind": "data"
   },
   {
-    "_id": { "$oid": "8d0000000000000000030005" },
-    "key": "forge_brds",
-    "collection": "forge_brds",
-    "title": "BRDs",
-    "titleSingular": "BRD",
-    "titlePlural": "BRDs",
-    "description": "Business Requirements Document — the structured spec for what we will build for a client. The header record: domain, overview, lifecycle status, and the all-important provenance links (the source chat session it was extracted from) and forward links (the delivery Initiative and built app). The granular content lives in Requirements rows. A BRD is LIVING: lastSyncedMessageId is the watermark of how far into the source chat it has been reconciled, so the conversation can continue and the BRD stays current.",
-    "ai": {
-      "purpose": "The single source-of-truth spec for a client build, decomposed into granular forge_brd_requirements rows, kept LIVING against its source chat.",
-      "howItWorks": "One BRD per engagement, linked to its Account/Deal and to the chat it came from (sourceSessionId). lastSyncedMessageId + lastSyncedAt are the WATERMARK — how far the source chat has been reconciled; the next sync processes only chat_session_messages with _id greater than lastSyncedMessageId, never the whole thread. version bumps on each material revision. fileIds carries the client's source artefacts (their spreadsheets/exports/photos).",
-      "manipulation": "Follow the 'forge-brd-extraction' skill — the canonical procedure. First pass: create the header (status draft), set sourceSessionId/language/domain/overview, link source files to fileIds, then add one forge_brd_requirements row per atomic need. To keep it LIVING on re-sync: read lastSyncedMessageId, process only messages after it, upsert requirements by reqKey, link any new files, then ADVANCE lastSyncedMessageId/lastSyncedAt and bump version. Move statusId through the lifecycle draft→in_review→approved→building→delivered.",
-      "outcomes": [],
-      "warnings": ["Always advance lastSyncedMessageId after a sync — it is what stops the next run reprocessing the whole chat.", "Do not delete superseded requirements — mark them dropped/superseded so the history survives.", "Open questions for the client live on the requirement rows (needsClarification + openQuestion), queryable as a worklist."]
+    "_id": {
+      "$oid": "8d000000000000000003000c"
     },
-    "icon": "lucide:file-text",
-    "appId": { "$oid": "8d0000000000000000000001" },
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["title", "statusId", "groupIds"],
-      "properties": {
-        "title": { "type": "string", "title": "Title", "description": "BRD title (e.g. 'Sörház — Cash, Expense & P&L app').", "minLength": 1, "maxLength": 240 },
-        "statusId": { "type": "string", "title": "Status", "description": "Lifecycle status (governed).", "x-ref": "forge_brd_statuses" },
-        "accountId": { "type": "string", "title": "Account", "description": "Client this BRD is for.", "x-ref": "forge_accounts" },
-        "dealId": { "type": "string", "title": "Deal", "description": "Deal this BRD scopes.", "x-ref": "forge_deals", "x-ui": { "hideInTable": true } },
-        "summary": { "type": "string", "title": "Summary", "description": "One-paragraph summary of the build.", "x-ui": { "hideInTable": true } },
-        "overview": { "type": "string", "title": "Overview", "description": "Narrative overview: the client's world, current workflow, and the product we will build (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "domain": { "type": "string", "title": "Domain", "description": "Business domain (e.g. hospitality / bar operations)." },
-        "language": { "type": "string", "title": "Language", "description": "Language the source conversation is in.", "x-ui": { "hideInTable": true } },
-        "sourceSessionId": { "type": "string", "title": "Source chat", "description": "The chat session this BRD was extracted from (provenance — the gold thread).", "x-ref": "chat_sessions", "x-ui": { "hideInTable": true } },
-        "lastSyncedMessageId": { "type": "string", "title": "Synced through (msg)", "description": "ID of the last chat_session_messages row reconciled into this BRD (watermark for incremental re-sync).", "x-ui": { "hideInTable": true } },
-        "lastSyncedAt": { "type": "string", "title": "Last synced", "description": "When the BRD was last reconciled against its source chat (ISO).", "format": "date-time" },
-        "initiativeId": { "type": "string", "title": "Initiative", "description": "Project-manager Initiative delivering this BRD.", "x-ref": "project_manager_issues", "x-ui": { "hideInTable": true } },
-        "appId": { "type": "string", "title": "Delivered app", "description": "The app built from this BRD.", "x-ref": "apps", "x-ui": { "hideInTable": true } },
-        "fileIds": { "type": "array", "title": "Files", "description": "Source artefacts (spreadsheets, mockups, exports).", "items": { "type": "string", "x-ref": "files" }, "x-ui": { "control": "file", "hideInTable": true } },
-        "version": { "type": "integer", "title": "Version", "description": "Revision counter, bumped on each material re-sync.", "minimum": 1, "default": 1 },
-        "groupIds": { "type": "array", "title": "Groups", "description": "Row-security scope.", "items": { "type": "string", "x-ref": "groups" }, "x-ui": { "hideInTable": true } }
-      }
-    },
-    "ui": { "display": { "templates": ["{{title}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
-    "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] }
-    },
-    "tier": 3,
-    "kind": "data"
-  },
-  {
-    "_id": { "$oid": "8d0000000000000000030006" },
-    "key": "forge_brd_requirements",
-    "collection": "forge_brd_requirements",
-    "title": "Requirements",
-    "titleSingular": "Requirement",
-    "titlePlural": "Requirements",
-    "description": "One atomic, granular requirement within a BRD — the unit that makes the spec precise and traceable. Each row is a single statement (a data entity, a field, a workflow step, a report, a metric, an integration, an agent capability, a business rule, an edge case) with its rationale, acceptance criteria, priority and status. reqKey makes re-extraction idempotent (upsert, not duplicate); sourceQuote/sourceMessageId tie it to the exact line in the source chat; linkedIssueId ties it to the work that delivers it. changeLog records mutations so the requirement is LIVING — it can change as the conversation continues.",
-    "ai": {
-      "purpose": "The granular, line-by-line requirements of a BRD — each independently prioritised, statused, sourced, flagged for open questions, and linkable to the delivery task.",
-      "howItWorks": "Belongs to a BRD via brdId. reqKey is a STABLE slug unique within the BRD; re-extraction/re-sync upserts on (brdId, reqKey) so nothing ever duplicates. categoryId/priorityId/statusId are governed lookups. needsClarification=true + openQuestion mark a point that still needs the CLIENT's answer — directly queryable (filter needsClarification=true) and rendered by the 'Open questions' window on the BRD Workspace dashboard. sourceQuote/sourceMessageId tie the row to the client's exact words; linkedIssueId to the project-manager Story/Task that delivers it; changeLog is append-only history.",
-      "manipulation": "Follow the 'forge-brd-extraction' skill — it is the canonical, step-by-step procedure for this collection. One row per atomic requirement. For anything the client has not settled, set needsClarification=true and put the exact question in openQuestion; when they answer, fold it into requirement/acceptanceCriteria, append a changeLog line, clear needsClarification and move proposed→confirmed. Never reuse a reqKey and never delete a row — mark it dropped/superseded (with supersededByReqKey) instead.",
-      "outcomes": [],
-      "warnings": ["reqKey is the idempotency key: keep it stable across re-syncs and never reuse it for a different requirement.", "Open questions are tracked ONLY via needsClarification=true + openQuestion — never bury an unresolved point in prose.", "History is append-only: prefer status/flag changes + changeLog over destructive edits."]
-    },
-    "icon": "lucide:list-checks",
-    "appId": { "$oid": "8d0000000000000000000001" },
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["brdId", "reqKey", "title", "statusId", "groupIds"],
-      "properties": {
-        "brdId": { "type": "string", "title": "BRD", "description": "Parent BRD.", "x-ref": "forge_brds" },
-        "reqKey": { "type": "string", "title": "Key", "description": "Stable slug, unique within the BRD. The idempotency key for re-sync.", "minLength": 1, "maxLength": 120 },
-        "title": { "type": "string", "title": "Title", "description": "Short requirement title.", "minLength": 1, "maxLength": 240 },
-        "categoryId": { "type": "string", "title": "Category", "description": "Requirement category (governed): data model, workflow, report, integration, agent capability, business rule, edge case, role.", "x-ref": "forge_requirement_categories" },
-        "priorityId": { "type": "string", "title": "Priority", "description": "MoSCoW priority (governed).", "x-ref": "forge_requirement_priorities" },
-        "statusId": { "type": "string", "title": "Status", "description": "Requirement status (governed).", "x-ref": "forge_requirement_statuses" },
-        "needsClarification": { "type": "boolean", "title": "Needs clarification", "description": "TRUE = this requirement has an open question that must be answered by the client before it is settled. The discovery agent works from this flag: filter needsClarification=true, ask the client the openQuestion, fill the answer back in, then set it false.", "default": false },
-        "openQuestion": { "type": "string", "title": "Open question", "description": "The precise question to put to the client to resolve this requirement (what exactly we need them to confirm or decide). Paired with needsClarification.", "x-ui": { "format": "markdown" } },
-        "requirement": { "type": "string", "title": "Requirement", "description": "The precise requirement statement (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "rationale": { "type": "string", "title": "Rationale", "description": "Why this is needed — the business reason (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "acceptanceCriteria": { "type": "string", "title": "Acceptance criteria", "description": "How we know it is done (Markdown).", "x-ui": { "format": "markdown", "hideInTable": true } },
-        "sourceQuote": { "type": "string", "title": "Source quote", "description": "The exact line(s) from the source chat this came from.", "x-ui": { "control": "textarea", "hideInTable": true } },
-        "sourceMessageId": { "type": "string", "title": "Source message", "description": "ID of the chat_session_messages row this was extracted from.", "x-ui": { "hideInTable": true } },
-        "sourceSessionId": { "type": "string", "title": "Source chat", "description": "The chat session this requirement was extracted from.", "x-ref": "chat_sessions", "x-ui": { "hideInTable": true } },
-        "linkedIssueId": { "type": "string", "title": "Delivery issue", "description": "Project-manager Story/Task that delivers this requirement.", "x-ref": "project_manager_issues", "x-ui": { "hideInTable": true } },
-        "supersededByReqKey": { "type": "string", "title": "Superseded by", "description": "reqKey of the requirement that replaced this one, if any.", "x-ui": { "hideInTable": true } },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering within its category/BRD.", "minimum": 0, "x-ui": { "hideInTable": true } },
-        "changeLog": { "type": "array", "title": "Change log", "description": "Timestamped notes of how this requirement changed over time (living history).", "items": { "type": "string" }, "x-ui": { "hideInTable": true } },
-        "groupIds": { "type": "array", "title": "Groups", "description": "Row-security scope.", "items": { "type": "string", "x-ref": "groups" }, "x-ui": { "hideInTable": true } }
-      }
-    },
-    "ui": { "display": { "templates": ["{{title}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
-    "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] }
-    },
-    "tier": 3,
-    "kind": "data"
-  },
-  {
-    "_id": { "$oid": "8d0000000000000000030007" },
-    "key": "forge_account_stages",
-    "collection": "forge_account_stages",
-    "title": "Account Stages",
-    "titleSingular": "Account Stage",
-    "titlePlural": "Account Stages",
-    "description": "Governed lifecycle stages for an Account (lead → prospect → active client → dormant → lost). Drives colour-coded grouping and ordering.",
-    "icon": "lucide:milestone",
-    "appId": { "$oid": "8d0000000000000000000001" },
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["key", "name"],
-      "properties": {
-        "key": { "type": "string", "title": "Key", "description": "Stable unique key (slug).", "minLength": 1, "maxLength": 120 },
-        "name": { "type": "string", "title": "Name", "description": "Human-friendly name.", "minLength": 1, "maxLength": 200 },
-        "color": { "type": "string", "title": "Color", "description": "UI color.", "format": "color" },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering.", "minimum": 0 },
-        "isWon": { "type": "boolean", "title": "Active client", "description": "Whether this stage means a converted/active client.", "default": false },
-        "isLost": { "type": "boolean", "title": "Lost", "description": "Whether this stage means the relationship is lost/dead.", "default": false }
-      }
-    },
-    "ui": { "display": { "templates": ["{{name}}", "{{key}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
-    "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] }
-    },
-    "tier": 3,
-    "kind": "lookup"
-  },
-  {
-    "_id": { "$oid": "8d0000000000000000030008" },
-    "key": "forge_deal_stages",
-    "collection": "forge_deal_stages",
-    "title": "Deal Stages",
-    "titleSingular": "Deal Stage",
-    "titlePlural": "Deal Stages",
-    "description": "Governed pipeline stages for a Deal (new → discovery → BRD → proposal → building → delivered, plus lost). These are the kanban columns of the pipeline board.",
-    "icon": "lucide:columns-3",
-    "appId": { "$oid": "8d0000000000000000000001" },
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["key", "name"],
-      "properties": {
-        "key": { "type": "string", "title": "Key", "description": "Stable unique key (slug).", "minLength": 1, "maxLength": 120 },
-        "name": { "type": "string", "title": "Name", "description": "Human-friendly name.", "minLength": 1, "maxLength": 200 },
-        "color": { "type": "string", "title": "Color", "description": "UI color.", "format": "color" },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering (pipeline left→right).", "minimum": 0 },
-        "isWon": { "type": "boolean", "title": "Won", "description": "Whether this stage means the deal is won/in delivery.", "default": false },
-        "isLost": { "type": "boolean", "title": "Lost", "description": "Whether this stage means the deal is lost.", "default": false }
-      }
-    },
-    "ui": { "display": { "templates": ["{{name}}", "{{key}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
-    "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] }
-    },
-    "tier": 3,
-    "kind": "lookup"
-  },
-  {
-    "_id": { "$oid": "8d0000000000000000030009" },
-    "key": "forge_interaction_types",
-    "collection": "forge_interaction_types",
-    "title": "Interaction Types",
-    "titleSingular": "Interaction Type",
-    "titlePlural": "Interaction Types",
-    "description": "Governed vocabulary of touchpoint kinds (meeting, call, chat session, voice note, email, note, document). Each has an icon for the timeline.",
-    "icon": "lucide:tags",
-    "appId": { "$oid": "8d0000000000000000000001" },
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["key", "name"],
-      "properties": {
-        "key": { "type": "string", "title": "Key", "description": "Stable unique key (slug).", "minLength": 1, "maxLength": 120 },
-        "name": { "type": "string", "title": "Name", "description": "Human-friendly name.", "minLength": 1, "maxLength": 200 },
-        "color": { "type": "string", "title": "Color", "description": "UI color.", "format": "color" },
-        "icon": { "type": "string", "title": "Icon", "description": "Lucide icon key." },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering.", "minimum": 0 }
-      }
-    },
-    "ui": { "display": { "templates": ["{{name}}", "{{key}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
-    "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] }
-    },
-    "tier": 3,
-    "kind": "lookup"
-  },
-  {
-    "_id": { "$oid": "8d000000000000000003000a" },
-    "key": "forge_brd_statuses",
-    "collection": "forge_brd_statuses",
-    "title": "BRD Statuses",
-    "titleSingular": "BRD Status",
-    "titlePlural": "BRD Statuses",
-    "description": "Governed lifecycle statuses for a BRD (draft → in review → approved → building → delivered → superseded).",
-    "icon": "lucide:file-clock",
-    "appId": { "$oid": "8d0000000000000000000001" },
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["key", "name"],
-      "properties": {
-        "key": { "type": "string", "title": "Key", "description": "Stable unique key (slug).", "minLength": 1, "maxLength": 120 },
-        "name": { "type": "string", "title": "Name", "description": "Human-friendly name.", "minLength": 1, "maxLength": 200 },
-        "color": { "type": "string", "title": "Color", "description": "UI color.", "format": "color" },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering.", "minimum": 0 },
-        "isApproved": { "type": "boolean", "title": "Approved", "description": "Whether this status means the BRD is signed off to build.", "default": false },
-        "isDone": { "type": "boolean", "title": "Delivered", "description": "Whether this status means the build is delivered.", "default": false }
-      }
-    },
-    "ui": { "display": { "templates": ["{{name}}", "{{key}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
-    "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] }
-    },
-    "tier": 3,
-    "kind": "lookup"
-  },
-  {
-    "_id": { "$oid": "8d000000000000000003000b" },
-    "key": "forge_requirement_statuses",
-    "collection": "forge_requirement_statuses",
-    "title": "Requirement Statuses",
-    "titleSingular": "Requirement Status",
-    "titlePlural": "Requirement Statuses",
-    "description": "Governed statuses for a Requirement (proposed → confirmed → in build → delivered, plus deferred / dropped). Kanban columns of the requirements board.",
-    "icon": "lucide:badge-check",
-    "appId": { "$oid": "8d0000000000000000000001" },
-    "schema": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["key", "name"],
-      "properties": {
-        "key": { "type": "string", "title": "Key", "description": "Stable unique key (slug).", "minLength": 1, "maxLength": 120 },
-        "name": { "type": "string", "title": "Name", "description": "Human-friendly name.", "minLength": 1, "maxLength": 200 },
-        "color": { "type": "string", "title": "Color", "description": "UI color.", "format": "color" },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering.", "minimum": 0 },
-        "isConfirmed": { "type": "boolean", "title": "Confirmed", "description": "Whether the client has confirmed this requirement.", "default": false },
-        "isDone": { "type": "boolean", "title": "Delivered", "description": "Whether this requirement is delivered.", "default": false },
-        "isDropped": { "type": "boolean", "title": "Dropped", "description": "Whether this requirement was dropped/superseded.", "default": false }
-      }
-    },
-    "ui": { "display": { "templates": ["{{name}}", "{{key}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
-    "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] }
-    },
-    "tier": 3,
-    "kind": "lookup"
-  },
-  {
-    "_id": { "$oid": "8d000000000000000003000c" },
     "key": "forge_requirement_categories",
     "collection": "forge_requirement_categories",
     "title": "Requirement Categories",
@@ -468,32 +1674,107 @@
     "titlePlural": "Requirement Categories",
     "description": "Governed categories that classify a Requirement (data model, workflow, report/metric, integration, agent capability, business rule, edge case, role/permission, UI/UX). Used to group the spec into sections.",
     "icon": "lucide:folder-tree",
-    "appId": { "$oid": "8d0000000000000000000001" },
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
     "schema": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["key", "name"],
+      "required": [
+        "key",
+        "name"
+      ],
       "properties": {
-        "key": { "type": "string", "title": "Key", "description": "Stable unique key (slug).", "minLength": 1, "maxLength": 120 },
-        "name": { "type": "string", "title": "Name", "description": "Human-friendly name.", "minLength": 1, "maxLength": 200 },
-        "color": { "type": "string", "title": "Color", "description": "UI color.", "format": "color" },
-        "icon": { "type": "string", "title": "Icon", "description": "Lucide icon key." },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering.", "minimum": 0 }
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable unique key (slug).",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human-friendly name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "color": {
+          "type": "string",
+          "title": "Color",
+          "description": "UI color.",
+          "format": "color"
+        },
+        "icon": {
+          "type": "string",
+          "title": "Icon",
+          "description": "Lucide icon key."
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering.",
+          "minimum": 0
+        }
       }
     },
-    "ui": { "display": { "templates": ["{{name}}", "{{key}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}",
+          "{{key}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
     "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] }
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      }
     },
     "tier": 3,
     "kind": "lookup"
   },
   {
-    "_id": { "$oid": "8d000000000000000003000d" },
+    "_id": {
+      "$oid": "8d000000000000000003000d"
+    },
     "key": "forge_requirement_priorities",
     "collection": "forge_requirement_priorities",
     "title": "Requirement Priorities",
@@ -501,25 +1782,215 @@
     "titlePlural": "Requirement Priorities",
     "description": "Governed MoSCoW priorities for a Requirement (Must / Should / Could / Won't-for-now).",
     "icon": "lucide:flag",
-    "appId": { "$oid": "8d0000000000000000000001" },
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
     "schema": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["key", "name"],
+      "required": [
+        "key",
+        "name"
+      ],
       "properties": {
-        "key": { "type": "string", "title": "Key", "description": "Stable unique key (slug).", "minLength": 1, "maxLength": 120 },
-        "name": { "type": "string", "title": "Name", "description": "Human-friendly name.", "minLength": 1, "maxLength": 200 },
-        "color": { "type": "string", "title": "Color", "description": "UI color.", "format": "color" },
-        "order": { "type": "integer", "title": "Order", "description": "Ordering (highest first).", "minimum": 0 }
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable unique key (slug).",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human-friendly name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "color": {
+          "type": "string",
+          "title": "Color",
+          "description": "UI color.",
+          "format": "color"
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering (highest first).",
+          "minimum": 0
+        }
       }
     },
-    "ui": { "display": { "templates": ["{{name}}", "{{key}}"] }, "prefabs": { "list": "list", "edit": "edit", "show": "show" } },
-    "api": { "crud": true, "realtime": true },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}",
+          "{{key}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
     "auth": {
-      "read": { "groupIds": [{ "$oid": "7000000000000000001d0001" }, { "$oid": "7000000000000000001d0002" }] },
-      "create": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "edit": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] },
-      "delete": { "groupIds": [{ "$oid": "7000000000000000001d0001" }] }
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "lookup"
+  },
+  {
+    "_id": {
+      "$oid": "8d000000000000000003000b"
+    },
+    "key": "forge_requirement_statuses",
+    "collection": "forge_requirement_statuses",
+    "title": "Requirement Statuses",
+    "titleSingular": "Requirement Status",
+    "titlePlural": "Requirement Statuses",
+    "description": "Governed statuses for a Requirement (proposed → confirmed → in build → delivered, plus deferred / dropped). Kanban columns of the requirements board.",
+    "icon": "lucide:badge-check",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "name"
+      ],
+      "properties": {
+        "key": {
+          "type": "string",
+          "title": "Key",
+          "description": "Stable unique key (slug).",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Human-friendly name.",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "color": {
+          "type": "string",
+          "title": "Color",
+          "description": "UI color.",
+          "format": "color"
+        },
+        "order": {
+          "type": "integer",
+          "title": "Order",
+          "description": "Ordering.",
+          "minimum": 0
+        },
+        "isConfirmed": {
+          "type": "boolean",
+          "title": "Confirmed",
+          "description": "Whether the client has confirmed this requirement.",
+          "default": false
+        },
+        "isDone": {
+          "type": "boolean",
+          "title": "Delivered",
+          "description": "Whether this requirement is delivered.",
+          "default": false
+        },
+        "isDropped": {
+          "type": "boolean",
+          "title": "Dropped",
+          "description": "Whether this requirement was dropped/superseded.",
+          "default": false
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{name}}",
+          "{{key}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          }
+        ]
+      }
     },
     "tier": 3,
     "kind": "lookup"
