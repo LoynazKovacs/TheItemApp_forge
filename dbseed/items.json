@@ -193,11 +193,11 @@
     "titlePlural": "BRDs",
     "description": "Business Requirements Document — the structured spec for what we will build for a client. The header record: domain, overview, lifecycle status, and the all-important provenance links (the source chat session it was extracted from) and forward links (the delivery Initiative and built app). The granular content lives in Requirements rows. A BRD is LIVING: lastSyncedMessageId is the watermark of how far into the source chat it has been reconciled, so the conversation can continue and the BRD stays current.",
     "ai": {
-      "purpose": "The single source-of-truth spec for a client build, decomposed into granular Requirements.",
-      "howItWorks": "One BRD per engagement, linked to an Account/Deal. Extracted from a chat session (sourceSessionId). lastSyncedMessageId records the last processed message so re-syncs are incremental and idempotent. version bumps each material revision.",
-      "manipulation": "Create the header, then add forge_brd_requirements rows (one per atomic requirement). On re-sync, advance lastSyncedMessageId/lastSyncedAt and bump version. Set statusId through the lifecycle (draft → in review → approved → building → delivered).",
+      "purpose": "The single source-of-truth spec for a client build, decomposed into granular forge_brd_requirements rows, kept LIVING against its source chat.",
+      "howItWorks": "One BRD per engagement, linked to its Account/Deal and to the chat it came from (sourceSessionId). lastSyncedMessageId + lastSyncedAt are the WATERMARK — how far the source chat has been reconciled; the next sync processes only chat_session_messages with _id greater than lastSyncedMessageId, never the whole thread. version bumps on each material revision. fileIds carries the client's source artefacts (their spreadsheets/exports/photos).",
+      "manipulation": "Follow the 'forge-brd-extraction' skill — the canonical procedure. First pass: create the header (status draft), set sourceSessionId/language/domain/overview, link source files to fileIds, then add one forge_brd_requirements row per atomic need. To keep it LIVING on re-sync: read lastSyncedMessageId, process only messages after it, upsert requirements by reqKey, link any new files, then ADVANCE lastSyncedMessageId/lastSyncedAt and bump version. Move statusId through the lifecycle draft→in_review→approved→building→delivered.",
       "outcomes": [],
-      "warnings": ["Do not delete superseded requirements — mark them dropped/superseded so the history survives."]
+      "warnings": ["Always advance lastSyncedMessageId after a sync — it is what stops the next run reprocessing the whole chat.", "Do not delete superseded requirements — mark them dropped/superseded so the history survives.", "Open questions for the client live on the requirement rows (needsClarification + openQuestion), queryable as a worklist."]
     },
     "icon": "lucide:file-text",
     "appId": { "$oid": "8d0000000000000000000001" },
@@ -244,11 +244,11 @@
     "titlePlural": "Requirements",
     "description": "One atomic, granular requirement within a BRD — the unit that makes the spec precise and traceable. Each row is a single statement (a data entity, a field, a workflow step, a report, a metric, an integration, an agent capability, a business rule, an edge case) with its rationale, acceptance criteria, priority and status. reqKey makes re-extraction idempotent (upsert, not duplicate); sourceQuote/sourceMessageId tie it to the exact line in the source chat; linkedIssueId ties it to the work that delivers it. changeLog records mutations so the requirement is LIVING — it can change as the conversation continues.",
     "ai": {
-      "purpose": "The granular, line-by-line requirements of a BRD — each independently prioritised, statused, sourced and linkable to a delivery task.",
-      "howItWorks": "Belongs to a BRD via brdId. reqKey is a stable slug unique within the BRD; re-sync upserts on (brdId, reqKey). categoryId/priorityId/statusId are governed. sourceQuote captures the customer's own words; linkedIssueId points to the project-manager Task delivering it.",
-      "manipulation": "Add one row per atomic requirement. When a requirement changes, edit it and append a line to changeLog; never silently overwrite history. When dropped/replaced, set status to dropped/superseded and supersededByReqKey rather than deleting.",
+      "purpose": "The granular, line-by-line requirements of a BRD — each independently prioritised, statused, sourced, flagged for open questions, and linkable to the delivery task.",
+      "howItWorks": "Belongs to a BRD via brdId. reqKey is a STABLE slug unique within the BRD; re-extraction/re-sync upserts on (brdId, reqKey) so nothing ever duplicates. categoryId/priorityId/statusId are governed lookups. needsClarification=true + openQuestion mark a point that still needs the CLIENT's answer — directly queryable (filter needsClarification=true) and rendered by the 'Open questions' window on the BRD Workspace dashboard. sourceQuote/sourceMessageId tie the row to the client's exact words; linkedIssueId to the project-manager Story/Task that delivers it; changeLog is append-only history.",
+      "manipulation": "Follow the 'forge-brd-extraction' skill — it is the canonical, step-by-step procedure for this collection. One row per atomic requirement. For anything the client has not settled, set needsClarification=true and put the exact question in openQuestion; when they answer, fold it into requirement/acceptanceCriteria, append a changeLog line, clear needsClarification and move proposed→confirmed. Never reuse a reqKey and never delete a row — mark it dropped/superseded (with supersededByReqKey) instead.",
       "outcomes": [],
-      "warnings": ["Keep reqKey stable across re-syncs — it is the idempotency key. Do not reuse a reqKey for a different requirement."]
+      "warnings": ["reqKey is the idempotency key: keep it stable across re-syncs and never reuse it for a different requirement.", "Open questions are tracked ONLY via needsClarification=true + openQuestion — never bury an unresolved point in prose.", "History is append-only: prefer status/flag changes + changeLog over destructive edits."]
     },
     "icon": "lucide:list-checks",
     "appId": { "$oid": "8d0000000000000000000001" },
