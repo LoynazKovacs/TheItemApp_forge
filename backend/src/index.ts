@@ -16,7 +16,7 @@ async function main(): Promise<void> {
     },
   });
 
-  await app.register(cors, { origin: true, credentials: true });
+  await app.register(cors, { origin: false });
 
   const seedRegistry = loadSeedRegistry();
   const appManifest = seedRegistry.manifest;
