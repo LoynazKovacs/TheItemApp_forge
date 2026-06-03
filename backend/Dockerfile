@@ -31,4 +31,5 @@ EXPOSE 3011
 HEALTHCHECK --interval=10s --timeout=5s --retries=10 --start-period=30s \
   CMD node -e "require('http').get('http://127.0.0.1:3011/api/health', (r) => { r.resume(); process.exit(r.statusCode === 200 ? 0 : 1); }).on('error', () => process.exit(1));"
 
+USER node
 CMD ["node", "dist/index.js"]
