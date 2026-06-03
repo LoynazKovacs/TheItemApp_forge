@@ -21,8 +21,7 @@ services:
       APP_REGISTRATION_KEY: "${APP_REGISTRATION_KEY:-}"
       CORE_API_URL: "http://backend:3001"
       FORGE_CORE_API_KEY: "${FORGE_CORE_API_KEY:-}"
-    ports:
-      - "${FORGE_API_PORT:-3011}:3011"
+    # No host port: reached only in-network via core Caddy (/forge-api/*).
     healthcheck:
       test: ["CMD", "node", "-e", "require('http').get('http://127.0.0.1:3011/api/health', (r) => { r.resume(); process.exit(r.statusCode === 200 ? 0 : 1); }).on('error', () => process.exit(1));"]
       interval: 10s
