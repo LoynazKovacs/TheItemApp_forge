@@ -1,6 +1,141 @@
 [
   {
     "_id": {
+      "$oid": "8d000000000000000003000e"
+    },
+    "key": "forge_account_notes",
+    "collection": "forge_account_notes",
+    "title": "Account Notes",
+    "titleSingular": "Account Note",
+    "titlePlural": "Account Notes",
+    "description": "Freeform notes about a client — anything worth remembering that doesn't fit a Requirement or an Interaction: how they like to be addressed, personal details, preferences, quirks, soft context. The 'really get to know the client' space.",
+    "ai": {
+      "purpose": "Hold the soft, human knowledge about a client that makes the relationship feel personal — how to address them, personal facts, preferences, quirks — anything that doesn't belong in a structured requirement or a dated interaction.",
+      "howItWorks": "Each row is one freeform note, scoped to an Account and optionally tagged. Append a note whenever you learn something worth keeping about the person or the relationship.",
+      "manipulation": "Append a note with the account and the body. Use the optional tag for a light category (e.g. preference, personal, logistics) if it helps.",
+      "outcomes": [],
+      "warnings": []
+    },
+    "icon": "lucide:sticky-note",
+    "appId": {
+      "$oid": "8d0000000000000000000001"
+    },
+    "schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "accountId",
+        "note",
+        "groupIds"
+      ],
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "title": "Account",
+          "description": "The client this note is about.",
+          "x-ref": "forge_accounts"
+        },
+        "note": {
+          "type": "string",
+          "title": "Note",
+          "description": "The freeform note (Markdown). Anything worth remembering about this client that doesn't fit a requirement or an interaction — e.g. 'address her as Viki', 'has a kid who likes candy', 'prefers calls after 2pm'.",
+          "minLength": 1,
+          "x-ui": {
+            "format": "markdown"
+          }
+        },
+        "tag": {
+          "type": "string",
+          "title": "Tag",
+          "description": "Optional light category for the note (e.g. preference, personal, logistics). Freeform.",
+          "maxLength": 80
+        },
+        "contactId": {
+          "type": "string",
+          "title": "Contact",
+          "description": "Optional — the specific person this note is about.",
+          "x-ref": "forge_contacts",
+          "x-ui": {
+            "hideInTable": true
+          }
+        },
+        "groupIds": {
+          "type": "array",
+          "title": "Groups",
+          "description": "Row-security scope.",
+          "items": {
+            "type": "string",
+            "x-ref": "groups"
+          },
+          "x-ui": {
+            "hideInTable": true
+          }
+        }
+      }
+    },
+    "ui": {
+      "display": {
+        "templates": [
+          "{{note}}"
+        ]
+      },
+      "prefabs": {
+        "list": "list",
+        "edit": "edit",
+        "show": "show"
+      }
+    },
+    "api": {
+      "crud": true,
+      "realtime": true
+    },
+    "auth": {
+      "read": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "create": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "edit": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      },
+      "delete": {
+        "groupIds": [
+          {
+            "$oid": "7000000000000000001d0001"
+          },
+          {
+            "$oid": "7000000000000000001d0002"
+          }
+        ]
+      }
+    },
+    "tier": 3,
+    "kind": "data"
+  },
+  {
+    "_id": {
       "$oid": "8d0000000000000000030007"
     },
     "key": "forge_account_stages",
