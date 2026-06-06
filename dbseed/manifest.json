@@ -81,7 +81,7 @@
       "file": "data/item_tree_views.json",
       "matchBy": "_id",
       "installMode": "installConfig",
-      "exportFields": ["modelId", "name", "groupBy", "sortField", "sortDir", "leafLimit", "allowCreate", "rowDensity", "showAvatar", "avatarField", "avatarShape", "showIcon", "showBadge", "badgeField", "showTitle", "titleField", "titleWeight", "showSubtitle", "showRightTop", "showRightBottom", "rightBottomField", "rightBottomKind", "isDefault", "pinned", "order"]
+      "exportFields": ["modelId", "name", "groupBy", "sortField", "sortDir", "sortFields", "leafLimit", "allowCreate", "rowDensity", "showAvatar", "avatarField", "avatarShape", "showIcon", "showBadge", "badgeField", "showTitle", "titleField", "titleWeight", "showSubtitle", "subtitleField", "subtitleLines", "showContent", "contentField", "contentLines", "showRightTop", "rightTopField", "rightTopFormat", "showRightMiddle", "rightMiddleField", "rightMiddleKind", "showRightBottom", "rightBottomField", "rightBottomKind", "clickActionKey", "isDefault", "pinned", "order", "appId"]
     },
     {
       "collection": "forge_account_stages",

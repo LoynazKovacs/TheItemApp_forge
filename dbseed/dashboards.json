@@ -21,7 +21,7 @@
       }
     ],
     "gridsterConfigId": {
-      "$oid": "700000000000000000050004"
+      "$oid": "700000000000000000050003"
     },
     "tiles": [
       {
@@ -30,124 +30,134 @@
         },
         "x": 0,
         "y": 0,
-        "cols": 8,
-        "rows": 9,
-        "slot": {
-          "key": "",
-          "title": "",
-          "collapsedByDefault": false,
-          "autoShowOnIntent": true,
-          "icon": "",
-          "render": {
-            "prefabKey": "",
-            "collection": "",
-            "recordId": ""
-          },
-          "accepts": [],
-          "whenHidden": {
-            "absorbedBy": []
-          }
-        }
+        "cols": 24,
+        "rows": 3
+      },
+      {
+        "windowId": {
+          "$oid": "6a247884644b16df29a116df"
+        },
+        "x": 0,
+        "y": 3,
+        "cols": 24,
+        "rows": 2
       },
       {
         "windowId": {
           "$oid": "8d0000000000000000020002"
         },
-        "x": 8,
-        "y": 0,
+        "x": 0,
+        "y": 5,
         "cols": 8,
-        "rows": 9,
-        "slot": {
-          "key": "",
-          "title": "",
-          "collapsedByDefault": false,
-          "autoShowOnIntent": true,
-          "icon": "",
-          "render": {
-            "prefabKey": "",
-            "collection": "",
-            "recordId": ""
-          },
-          "accepts": [],
-          "whenHidden": {
-            "absorbedBy": []
-          }
-        }
-      },
-      {
-        "windowId": {
-          "$oid": "8d0000000000000000020003"
-        },
-        "x": 16,
-        "y": 0,
-        "cols": 8,
-        "rows": 9,
-        "slot": {
-          "key": "",
-          "title": "",
-          "collapsedByDefault": false,
-          "autoShowOnIntent": true,
-          "icon": "",
-          "render": {
-            "prefabKey": "",
-            "collection": "",
-            "recordId": ""
-          },
-          "accepts": [],
-          "whenHidden": {
-            "absorbedBy": []
-          }
-        }
+        "rows": 9
       },
       {
         "windowId": {
           "$oid": "8d0000000000000000020004"
         },
+        "x": 8,
+        "y": 5,
+        "cols": 16,
+        "rows": 9
+      },
+      {
+        "windowId": {
+          "$oid": "6a247886644b16df29a116f4"
+        },
         "x": 0,
-        "y": 9,
-        "cols": 24,
-        "rows": 10,
-        "slot": {
-          "key": "",
-          "title": "",
-          "collapsedByDefault": false,
-          "autoShowOnIntent": true,
-          "icon": "",
-          "render": {
-            "prefabKey": "",
-            "collection": "",
-            "recordId": ""
-          },
-          "accepts": [],
-          "whenHidden": {
-            "absorbedBy": []
-          }
-        }
+        "y": 14,
+        "cols": 8,
+        "rows": 7
       },
       {
         "windowId": {
           "$oid": "8d0000000000000000020005"
         },
+        "x": 8,
+        "y": 14,
+        "cols": 8,
+        "rows": 7
+      },
+      {
+        "windowId": {
+          "$oid": "6a24788a644b16df29a1171d"
+        },
+        "x": 16,
+        "y": 14,
+        "cols": 8,
+        "rows": 7
+      },
+      {
+        "windowId": {
+          "$oid": "6a247888644b16df29a11708"
+        },
         "x": 0,
-        "y": 19,
+        "y": 21,
+        "cols": 8,
+        "rows": 6
+      },
+      {
+        "windowId": {
+          "$oid": "8d0000000000000000020003"
+        },
+        "x": 8,
+        "y": 21,
+        "cols": 16,
+        "rows": 6
+      },
+      {
+        "windowId": {
+          "$oid": "6a24788c644b16df29a11b8c"
+        },
+        "x": 0,
+        "y": 27,
+        "cols": 8,
+        "rows": 8
+      },
+      {
+        "windowId": {
+          "$oid": "6a24788e644b16df29a11ba5"
+        },
+        "x": 8,
+        "y": 27,
+        "cols": 16,
+        "rows": 8
+      },
+      {
+        "windowId": {
+          "$oid": "6a247890644b16df29a11bab"
+        },
+        "x": 0,
+        "y": 35,
+        "cols": 8,
+        "rows": 6
+      },
+      {
+        "windowId": {
+          "$oid": "6a247892644b16df29a11bb4"
+        },
+        "x": 8,
+        "y": 35,
+        "cols": 8,
+        "rows": 6
+      },
+      {
+        "windowId": {
+          "$oid": "6a247888644b16df29a11704"
+        },
+        "x": 16,
+        "y": 35,
+        "cols": 8,
+        "rows": 6
+      },
+      {
+        "windowId": {
+          "$oid": "6a247894644b16df29a11bd6"
+        },
+        "x": 0,
+        "y": 41,
         "cols": 24,
-        "rows": 7,
-        "slot": {
-          "key": "",
-          "title": "",
-          "collapsedByDefault": false,
-          "autoShowOnIntent": true,
-          "icon": "",
-          "render": {
-            "prefabKey": "",
-            "collection": "",
-            "recordId": ""
-          },
-          "accepts": [],
-          "whenHidden": {
-            "absorbedBy": []
-          }
-        }
+        "rows": 7
       }
     ]
   },

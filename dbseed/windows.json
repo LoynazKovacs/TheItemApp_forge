@@ -1,13 +1,13 @@
 [
   {
     "_id": {
-      "$oid": "8d0000000000000000020001"
+      "$oid": "6a247884644b16df29a116df"
     },
     "dashboardId": {
       "$oid": "8d0000000000000000010001"
     },
-    "title": "Accounts",
-    "icon": "lucide:building-2",
+    "title": "Filters",
+    "icon": "lucide:filter",
     "groupIds": [
       {
         "$oid": "7000000000000000001d0001"
@@ -17,25 +17,158 @@
       }
     ],
     "modelId": {
-      "$oid": "8d0000000000000000030001"
+      "$oid": "8d0000000000000000030003"
     },
     "prefabId": {
-      "$oid": "700000000000000000060001"
+      "$oid": "700000000000000000060015"
     },
     "prefabConfig": {
-      "collection": "forge_accounts",
-      "query": {},
-      "sort": "-_meta.updatedAt",
+      "collection": "forge_deals"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a247886644b16df29a116f4"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Contacts",
+    "icon": "lucide:user-round",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030002"
+    },
+    "prefabId": {
+      "$oid": "70000000000000000006000b"
+    },
+    "prefabConfig": {
+      "collection": "forge_contacts",
       "ui": {
-        "filterBar": {
-          "showActiveFiltersTop": true
+        "tree": {
+          "viewId": {
+            "$oid": "6a247847644b16df29a0f638"
+          }
         }
       }
     }
   },
   {
     "_id": {
-      "$oid": "8d0000000000000000020002"
+      "$oid": "6a247888644b16df29a11704"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Interactions by type",
+    "icon": "lucide:chart-pie",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030004"
+    },
+    "prefabId": {
+      "$oid": "700000000000000000060008"
+    },
+    "prefabConfig": {
+      "collection": "forge_interactions",
+      "query": {},
+      "ui": {
+        "chart": {
+          "viewId": {
+            "$oid": "6a247855644b16df29a0ff79"
+          }
+        },
+        "filterBar": {
+          "showActiveFiltersTop": false
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a247888644b16df29a11708"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Deals",
+    "icon": "lucide:target",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030003"
+    },
+    "prefabId": {
+      "$oid": "700000000000000000060001"
+    },
+    "prefabConfig": {
+      "collection": "forge_deals",
+      "query": {},
+      "sort": "-_meta.updatedAt",
+      "ui": {
+        "filterBar": {
+          "showActiveFiltersTop": false
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a24788a644b16df29a1171d"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Account notes",
+    "icon": "lucide:sticky-note",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d000000000000000003000e"
+    },
+    "prefabId": {
+      "$oid": "700000000000000000060001"
+    },
+    "prefabConfig": {
+      "collection": "forge_account_notes",
+      "query": {},
+      "sort": "-_meta.updatedAt",
+      "ui": {
+        "filterBar": {
+          "showActiveFiltersTop": false
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a24788c644b16df29a11b8c"
     },
     "dashboardId": {
       "$oid": "8d0000000000000000010001"
@@ -54,15 +187,283 @@
       "$oid": "8d0000000000000000030005"
     },
     "prefabId": {
-      "$oid": "700000000000000000060001"
+      "$oid": "70000000000000000006000b"
     },
     "prefabConfig": {
       "collection": "forge_brds",
+      "ui": {
+        "tree": {
+          "viewId": {
+            "$oid": "6a24784b644b16df29a0fac1"
+          }
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a24788e644b16df29a11ba5"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Requirements board",
+    "icon": "lucide:list-checks",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030006"
+    },
+    "prefabId": {
+      "$oid": "70000000000000000006000a"
+    },
+    "prefabConfig": {
+      "collection": "forge_brd_requirements",
       "query": {},
-      "sort": "-_meta.updatedAt",
       "ui": {
         "filterBar": {
           "showActiveFiltersTop": false
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a247890644b16df29a11bab"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Requirements by category",
+    "icon": "lucide:chart-column",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030006"
+    },
+    "prefabId": {
+      "$oid": "700000000000000000060008"
+    },
+    "prefabConfig": {
+      "collection": "forge_brd_requirements",
+      "query": {},
+      "ui": {
+        "chart": {
+          "viewId": {
+            "$oid": "8d0000000000000000110003"
+          }
+        },
+        "filterBar": {
+          "showActiveFiltersTop": false
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a247892644b16df29a11bb4"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Requirements by priority",
+    "icon": "lucide:chart-pie",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030006"
+    },
+    "prefabId": {
+      "$oid": "700000000000000000060008"
+    },
+    "prefabConfig": {
+      "collection": "forge_brd_requirements",
+      "query": {},
+      "ui": {
+        "chart": {
+          "viewId": {
+            "$oid": "6a247858644b16df29a0ff88"
+          }
+        },
+        "filterBar": {
+          "showActiveFiltersTop": false
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6a247894644b16df29a11bd6"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Requirements: category × priority",
+    "icon": "lucide:bar-chart-3",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030006"
+    },
+    "prefabId": {
+      "$oid": "700000000000000000060007"
+    },
+    "prefabConfig": {
+      "collection": "forge_brd_requirements",
+      "query": {},
+      "ui": {
+        "showGrandTotals": true,
+        "filterBar": {
+          "showActiveFiltersTop": false
+        }
+      },
+      "aggregation": {
+        "rows": [
+          "categoryId"
+        ],
+        "columns": [
+          "priorityId"
+        ],
+        "values": [
+          {
+            "op": "count",
+            "field": "_id",
+            "as": "count"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000020001"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Forge at a glance",
+    "icon": "lucide:gauge",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030001"
+    },
+    "prefabId": {
+      "$oid": "700000000000000000060019"
+    },
+    "prefabConfig": {
+      "collection": "forge_accounts",
+      "ui": {
+        "kpi": {
+          "columns": 6,
+          "metrics": [
+            {
+              "label": "Accounts",
+              "icon": "lucide:building-2",
+              "op": "count",
+              "collection": "forge_accounts",
+              "color": "#2563eb"
+            },
+            {
+              "label": "Contacts",
+              "icon": "lucide:user-round",
+              "op": "count",
+              "collection": "forge_contacts",
+              "color": "#0891b2"
+            },
+            {
+              "label": "Deals",
+              "icon": "lucide:target",
+              "op": "count",
+              "collection": "forge_deals",
+              "color": "#7c3aed"
+            },
+            {
+              "label": "Interactions",
+              "icon": "lucide:message-square-text",
+              "op": "count",
+              "collection": "forge_interactions",
+              "color": "#d97706"
+            },
+            {
+              "label": "BRDs",
+              "icon": "lucide:file-text",
+              "op": "count",
+              "collection": "forge_brds",
+              "color": "#16a34a"
+            },
+            {
+              "label": "Requirements",
+              "icon": "lucide:list-checks",
+              "op": "count",
+              "collection": "forge_brd_requirements",
+              "color": "#dc2626"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "_id": {
+      "$oid": "8d0000000000000000020002"
+    },
+    "dashboardId": {
+      "$oid": "8d0000000000000000010001"
+    },
+    "title": "Accounts",
+    "icon": "lucide:building-2",
+    "groupIds": [
+      {
+        "$oid": "7000000000000000001d0001"
+      },
+      {
+        "$oid": "7000000000000000001d0002"
+      }
+    ],
+    "modelId": {
+      "$oid": "8d0000000000000000030001"
+    },
+    "prefabId": {
+      "$oid": "70000000000000000006000b"
+    },
+    "prefabConfig": {
+      "collection": "forge_accounts",
+      "ui": {
+        "tree": {
+          "viewId": {
+            "$oid": "6a247844644b16df29a0f634"
+          }
         }
       }
     }
