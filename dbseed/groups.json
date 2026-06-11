@@ -4,41 +4,35 @@
       "$oid": "8d0000000000000000040001"
     },
     "key": "forge_admin",
-    "keyLower": "forge_admin",
     "name": "Forge Admin",
     "description": "Full administrative access to Forge CRM: manage all records (accounts, contacts, deals, interactions, BRDs, requirements), configure lookup tables, and delete records.",
     "permissions": [],
     "appId": {
       "$oid": "8d0000000000000000000001"
-    },
-    "systemManaged": true
+    }
   },
   {
     "_id": {
       "$oid": "8d0000000000000000040002"
     },
     "key": "forge_editor",
-    "keyLower": "forge_editor",
     "name": "Forge Editor",
     "description": "Write access to Forge CRM: create and edit accounts, contacts, deals, interactions, BRDs, requirements, and lookup configuration. Cannot delete records.",
     "permissions": [],
     "appId": {
       "$oid": "8d0000000000000000000001"
-    },
-    "systemManaged": true
+    }
   },
   {
     "_id": {
       "$oid": "8d0000000000000000040003"
     },
     "key": "forge_viewer",
-    "keyLower": "forge_viewer",
     "name": "Forge Viewer",
     "description": "Read-only access to Forge CRM: view accounts, contacts, deals, interactions, BRDs, and requirements. Cannot create, modify, or delete any records.",
     "permissions": [],
     "appId": {
       "$oid": "8d0000000000000000000001"
-    },
-    "systemManaged": true
+    }
   }
 ]
